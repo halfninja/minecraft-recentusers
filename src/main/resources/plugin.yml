@@ -1,0 +1,12 @@
+name: RecentUsers
+main: uk.co.halfninja.minecraft.recentusers.RecentUsers
+version: 0.1
+commands:
+  recentusers:
+    description: Lets you know when players were last seen
+    usage: /recentusers
+    permission: recentusers.list
+    permission-message: You don't have <permission>
+permissions:
+  recentusers.list:
+    default: true
