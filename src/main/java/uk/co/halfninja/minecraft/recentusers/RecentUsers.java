@@ -20,13 +20,16 @@ public class RecentUsers extends JavaPlugin implements Listener {
 	private Map<String, Date> lastConnected = new HashMap<String,Date>();
 	
 	private int max;
+	private boolean includeSelf;
 
 	public RecentUsers() {}
 
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
 		getConfig().options().copyDefaults(true);
+		saveConfig();
 		max = getConfig().getInt("recentusers.maxitems");
+		includeSelf = getConfig().getBoolean("recentusers.includeself");
 		getLogger().info("Magic pants active.");
 	}
 
@@ -76,7 +79,7 @@ public class RecentUsers extends JavaPlugin implements Listener {
 	public List<RecentItem> getRecentItems(String me) {
 		List<RecentItem> item = new ArrayList<RecentItem>();
 		for (String name : lastConnected.keySet()) {
-			if (!me.equals(name)) {
+			if (includeSelf || !me.equals(name)) {
 				item.add(new RecentItem(name, lastConnected.get(name)));
 			}
 		}

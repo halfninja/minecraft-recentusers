@@ -1,2 +1,3 @@
 recentusers:
   maxitems: 5
+  includeself: false
